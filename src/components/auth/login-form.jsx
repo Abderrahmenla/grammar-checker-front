@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Card from "@/components/ui/card";
 import Button from "@/components/ui/button";
 import TextInput from "@/components/ui/text-input";
@@ -9,6 +9,9 @@ import { signIn } from "next-auth/react";
 
 const LoginForm = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const showSuccess = searchParams.get("registered") === "true";
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -52,6 +55,12 @@ const LoginForm = () => {
 
   return (
     <Card className="w-full max-w-md mx-auto p-6">
+      {showSuccess && (
+        <div className="mb-6 p-4 bg-success/10 text-success rounded-md text-center text-sm">
+          Registration successful! You can now login with your credentials.
+        </div>
+      )}
+
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="space-y-2 text-center">
           <h1 className="text-2xl font-semibold tracking-tight">Welcome!</h1>

@@ -42,7 +42,7 @@ const RegisterForm = () => {
         password: formData.password,
         fullName: formData.fullName,
       });
-      router.push("/");
+      router.push("/?registered=true");
     } catch (error) {
       setApiError(error.response?.data?.error || "Registration failed");
     } finally {
